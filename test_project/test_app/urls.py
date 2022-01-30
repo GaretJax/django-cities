@@ -1,4 +1,4 @@
-from django.conf.urls import url
+from django.urls import re_path
 from django.contrib import admin
 from django.core.exceptions import ImproperlyConfigured
 
@@ -7,24 +7,11 @@ from cities.util import patterns
 
 app_name = "test_app"
 
-try:
-    from django.conf.urls import include
-    # Django < 2.0
-    urlpatterns = patterns(
-        '',
-        # Examples:
-        # url(r'^$', 'test_project.views.home', name='home'),
-        # url(r'^blog/', include('blog.urls')),
+urlpatterns = patterns(
+    '',
+    # Examples:
+    # re_path(r'^$', 'test_project.views.home', name='home'),
+    # re_path(r'^blog/', include('blog.urls')),
 
-        url(r'^admin/', include(admin.site.urls)),
-    )
-except ImproperlyConfigured:
-    # Django >= 2.0
-    urlpatterns = patterns(
-        '',
-        # Examples:
-        # url(r'^$', 'test_project.views.home', name='home'),
-        # url(r'^blog/', include('blog.urls')),
-
-        url(r'^admin/', admin.site.urls),
-    )
+    re_path(r'^admin/', admin.site.urls),
+)

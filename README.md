@@ -326,7 +326,7 @@ def default_slugify(obj, value):
     if value is None:
         return None
 
-    value = force_text(unicode_func(value))
+    value = force_str(unicode_func(value))
     value = unicodedata.normalize('NFKC', value.strip())
     value = re.sub(to_und_rgx, '_', value)
     value = re.sub(slugify_rgx, '-', value)

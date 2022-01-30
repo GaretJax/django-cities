@@ -1,5 +1,5 @@
 from django import VERSION as DJANGO_VERSION
-from django.conf.urls import include, url
+from django.urls import include, re_path
 from django.contrib import admin
 from django.views.generic import ListView
 from cities.models import (Country, Region, City, District, PostalCode)
@@ -53,6 +53,6 @@ admin.autodiscover()
 
 urlpatterns = patterns(
     '',
-    url(r'^admin/', include(admin.site.urls)),
-    url(r'^(.*)$', PlaceListView.as_view()),
+    re_path(r'^admin/', include(admin.site.urls)),
+    re_path(r'^(.*)$', PlaceListView.as_view()),
 )

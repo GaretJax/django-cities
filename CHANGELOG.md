@@ -1,5 +1,10 @@
 # Changelog #
 
+
+## v0.6.1 (by GaretJax) ##
+
+- Compatibility with django 4
+
 ## v0.6 ##
 
 ### Added ###
