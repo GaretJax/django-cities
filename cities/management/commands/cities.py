@@ -945,6 +945,7 @@ class Command(BaseCommand):
 
                 # We do this so we don't have to deal with exceptions being thrown
                 # in the middle of transactions
+                multiple = False
                 for args_dict in postal_code_args:
                     num_pcs = PostalCode.objects.filter(
                         *args_dict['args'],
@@ -960,11 +961,16 @@ class Command(BaseCommand):
                             *args_dict['args'],
                             **{k: v for k, v in args_dict.items() if k != 'args'})
                         self.logger.debug("item: {}\nresults: {}".format(item, pcs))
+                        multiple = True
+                        continue
                         # Raise a MultipleObjectsReturned exception
-                        PostalCode.objects.get(
-                            *args_dict['args'],
-                            **{k: v for k, v in args_dict.items() if k != 'args'})
+                        # PostalCode.objects.get(
+                        #     *args_dict['args'],
+                        #     **{k: v for k, v in args_dict.items() if k != 'args'})
                 else:
+                    if multiple:
+                        self.logger.info("item: {}\nresults: {}".format(item, pcs))
+
                     self.logger.debug("Creating postal code: {}".format(item))
                     pc = PostalCode(
                         country=country,
